@@ -5,7 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signos Vitales del Bebé</title>
     <style>
-        /* Estilos omitidos por brevedad */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f1e7;
+            color: #333;
+        }
+        header {
+            background-color: #fec89a;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+        .vital-signs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 20px;
+            background-color: #ffeadb;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .vital-sign {
+            flex: 1;
+            text-align: center;
+        }
+        .vital-sign h2 {
+            color: #e17055;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .vital-sign p {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e17055;
+        }
+        .alerts {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        .hidden {
+            display: none;
+        }
+        .education,
+        .health-tips,
+        .emergency-instructions,
+        .doctors {
+            background-color: #ffeadb;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #e17055;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+        ul, ol {
+            padding-left: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .animal-image {
+            display: block;
+            margin: 0 auto;
+            width: 300px;
+            height: auto;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -16,15 +103,15 @@
         <div class="vital-signs">
             <div class="vital-sign temperature">
                 <h2>Temperatura</h2>
-                <p>37.2°C</p>
+                <p id="temperature">-- °C</p>
             </div>
             <div class="vital-sign oxygen">
                 <h2>Oxigenación</h2>
-                <p>99%</p>
+                <p id="oxygen">-- %</p>
             </div>
             <div class="vital-sign heartbeat">
                 <h2>Pulsaciones</h2>
-                <p>110 bpm</p>
+                <p id="heartbeat">-- bpm</p>
             </div>
         </div>
         <div class="alerts hidden">
@@ -57,55 +144,6 @@
         <!-- Instrucciones para Actuar en Situaciones de Riesgo -->
         <section class="emergency-instructions">
             <h2>Instrucciones para Actuar en Situaciones de Riesgo</h2>
-            <p>Si notas algún signo de alerta en los signos vitales del bebé, como temperatura alta o baja, baja oxigenación o pulsaciones irregulares, sigue estos pasos:</p>
-            <ol>
-                <li>Intenta mantener la calma para poder tomar decisiones efectivas.</li>
-                <li>Llama inmediatamente a servicios médicos de emergencia.</li>
-                <li>Mientras esperas ayuda, sigue las indicaciones del profesional médico por teléfono.</li>
-                <li>Si es necesario, administra primeros auxilios básicos siguiendo las instrucciones del médico.</li>
-            </ol>
-            <p>Recuerda que la prontitud en la respuesta puede ser crucial para la salud y la vida del bebé.</p>
-        </section>
+            <p>Si notas algún signo de alert
 
-        <!-- Médicos que pueden Ayudar -->
-        <section class="doctors">
-            <h2>Médicos que Pueden Ayudar</h2>
-            <p>Siempre ten a mano los números de teléfono de los siguientes profesionales médicos:</p>
-            <ul>
-                <li>Pediatra del bebé</li>
-                <li>Servicios de emergencia locales</li>
-                <li>Línea de ayuda pediátrica</li>
-            </ul>
-            <p>Estos profesionales pueden proporcionarte orientación y ayuda inmediata en caso de emergencia.</p>
-        </section>
-    </div>
-
-    <script>
-        // Simulación de cambio de signos vitales y alertas
-        setInterval(function() {
-            // Generar valores aleatorios para los signos vitales
-            let temperature = (Math.random() * 1.5) + 36.5;
-            let oxygen = Math.floor(Math.random() * 6) + 94;
-            let heartbeat = Math.floor(Math.random() * 31) + 100;
-
-            // Actualizar los valores en la interfaz
-            document.querySelector('.temperature p').textContent = temperature.toFixed(1) + '°C';
-            document.querySelector('.oxygen p').textContent = oxygen + '%';
-            document.querySelector('.heartbeat p').textContent = heartbeat + ' bpm';
-
-            // Verificar si hay alguna alerta y mostrarla
-            let alertMessage = '';
-            if (temperature > 37.5 || temperature < 36 || oxygen < 95 || heartbeat > 130 || heartbeat < 80) {
-                alertMessage = '¡Alerta! Se han detectado signos vitales anormales.';
-            } else {
-                alertMessage = 'No hay alertas actualmente.';
-            }
-            document.getElementById('alertMessage').textContent = alertMessage;
-
-            // Mostrar u ocultar el área de alertas según sea necesario
-            if (alertMessage !== 'No hay alertas actualmente.') {
-                document.querySelector('.alerts').classList.remove('hidden');
-            } else {
-                document.querySelector('.alerts').classList.add('hidden');
-            }
-        }, 5000); //
+    
