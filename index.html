@@ -145,6 +145,58 @@
         <!-- Instrucciones para Actuar en Situaciones de Riesgo -->
         <section class="emergency-instructions">
             <h2>Instrucciones para Actuar en Situaciones de Riesgo</h2>
-            <p>Si notas algún signo de alert
+            <p>Si notas algún signo de alerta, consulta de inmediato a un médico o llama a emergencias.</p>
+        </section>
+    </div>
+
+    <script>
+        // Función para generar un valor aleatorio en un rango dado
+        function getRandomValue(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // Función para simular los signos vitales
+        function simulateVitalSigns() {
+            // Generar valores aleatorios para temperatura, oxigenación y pulsaciones
+            var temperature = getRandomValue(36.0, 37.5).toFixed(1);
+            var oxygen = getRandomValue(95, 100).toFixed(1);
+            var heartbeat = getRandomValue(80, 130).toFixed(0);
+
+            // Actualizar los elementos HTML con los nuevos valores simulados
+            document.getElementById("temperature").textContent = temperature + " °C";
+            document.getElementById("oxygen").textContent = oxygen + " %";
+            document.getElementById("heartbeat").textContent = heartbeat + " bpm";
+
+            // Verificar si hay alguna alerta
+            var alertMessage = "";
+            if (temperature < 36.0 || temperature > 37.5) {
+                alertMessage += "Temperatura fuera del rango normal. ";
+            }
+            if (oxygen < 95) {
+                alertMessage += "Niveles de oxígeno bajos. ";
+            }
+            if (heartbeat < 80 || heartbeat > 130) {
+                alertMessage += "Pulsaciones fuera del rango normal. ";
+            }
+
+            // Mostrar la alerta si es necesario
+            var alertsDiv = document.querySelector(".alerts");
+            if (alertMessage !== "") {
+                alertsDiv.classList.remove("hidden");
+                document.getElementById("alertMessage").textContent = alertMessage;
+            } else {
+                alertsDiv.classList.add("hidden");
+            }
+        }
+
+        // Simular los signos vitales cada 5 segundos
+        setInterval(simulateVitalSigns, 5000);
+
+        // Simular los signos vitales una vez al cargar la página
+        simulateVitalSigns();
+    </script>
+</body>
+</html>
+
 
     
